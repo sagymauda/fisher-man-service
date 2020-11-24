@@ -10,7 +10,7 @@ public class Consumer {
 
 
     @RabbitListener(queues = {ConfigurationRabbit.FISH_QUEUE})
-    public void sendFishId(String fishId ){
+    public void getFishId(String fishId ){
         log.info("Handle The ID!!");
         log.info(fishId);
     }

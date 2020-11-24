@@ -42,22 +42,6 @@ public class ConfigureRabbitMq {
         return new Jackson2JsonMessageConverter();
     }
 
-//    @Bean
-//    public TopicExchange fishIdExchange()
-//    {
-//        return new TopicExchange(FISH_EXCHANGE);
-//    }
-//
-//    @Bean
-//    public Queue defaultParsingQueue(){
-//        return new Queue(FISH_QUEUE);
-//    }
-//
-//    @Bean
-//    public Binding QueueToExchangeBinding(){
-//        return BindingBuilder.bind(defaultParsingQueue()).to(fishIdExchange()).with(ROUTING_KEY);
-//    }
-
 
     @Bean
     public Declarables queueDeclarables() {

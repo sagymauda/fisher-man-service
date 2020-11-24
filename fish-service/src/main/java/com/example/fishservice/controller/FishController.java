@@ -1,6 +1,7 @@
 package com.example.fishservice.controller;
 
 import com.example.fishservice.configuredRabbit.ConfigureRabbitMq;
+import com.example.fishservice.configuredRabbit.SendFishIdMessage;
 import com.example.fishservice.entity.Fish;
 import com.example.fishservice.service.FishService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -17,18 +18,18 @@ public class FishController {
     @Autowired
     private FishService fishService;
 
-    private final RabbitTemplate rabbitTemplate;
+    @Autowired
+    SendFishIdMessage sendFishIdMessage;
 
 
 
-    public FishController() {
-        rabbitTemplate = new RabbitTemplate();
-    }
+
+
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public Fish createFish(@RequestBody Fish fish) {
         fishService.save(fish);
-        rabbitTemplate.convertAndSend(ConfigureRabbitMq.FISH_EXCHANGE,ConfigureRabbitMq.FISH_QUEUE,fish.getId());
+        sendFishIdMessage.sendFishIdToFisherMan(fish.getId(),fish.getFisherManId());
         return fish;
 
     }

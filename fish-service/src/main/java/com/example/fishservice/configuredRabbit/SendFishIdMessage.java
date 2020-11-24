@@ -18,9 +18,9 @@ public class SendFishIdMessage {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendFishIdToFisherMan(){
-         String fishId = "5faaa13e74d3f2398f7cf879";
-        rabbitTemplate.convertAndSend(ConfigureRabbitMq.FISH_EXCHANGE,ConfigureRabbitMq.ROUTING_KEY, fishId);
+    public void sendFishIdToFisherMan(String fishId ,String fisherManId){
+         String info = fishId +" , " + fisherManId;
+        rabbitTemplate.convertAndSend(ConfigureRabbitMq.FISH_EXCHANGE,ConfigureRabbitMq.ROUTING_KEY, info);
         log.info("got here");
     }
 }
